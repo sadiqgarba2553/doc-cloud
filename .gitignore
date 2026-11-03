@@ -1,0 +1,13 @@
+node_modules/
+dist/
+output/
+src-tauri/target/
+src-tauri/gen/
+playwright-report/
+*.log
+.env
+.env.*
+releases/
+
+.release/
+.playwright-cli/

@@ -1,0 +1,22 @@
+# Release checklist
+
+- [x] Combine UI and core without overwriting source files.
+- [x] Connect real text editing, local library and native exports.
+- [x] Add original light/dark/system interface and remove remote fonts/styles.
+- [x] Add automated storage, formatting, pagination, import/export and browser tests.
+- [x] Generate application icons and native dialog capabilities.
+- [ ] Validate installer execution on a clean Windows machine, including file dialogs, update/uninstall and data retention.
+- [ ] Build signed Windows EXE/MSI releases; an unsigned development installer is not a production release.
+- [ ] Run macOS builds on Intel and Apple Silicon; configure Developer ID signing and Apple notarization before public distribution.
+- [ ] Run Linux AppImage, DEB and RPM builds and install/uninstall tests on supported distributions.
+- [ ] Implement file-association launch handling.
+- [ ] Implement and test paragraph/table splitting, section layout and print fidelity across supported page sizes.
+- [ ] Expand DOCX compatibility corpus, ODT/DOC conversion and conversion backup UX.
+- [ ] Add resource-limited hostile document import tests and complete native filesystem security review.
+- [ ] Add explicit crash recovery ledger, external file watchers and local metadata index.
+- [ ] Complete tracked changes and per-change review.
+- [ ] Add authenticated collaboration, encrypted transport, viewer/commenter/editor enforcement and reconnect/concurrency tests.
+- [ ] Validate large documents, memory, startup and typing latency with recorded measurements.
+- [ ] Complete accessible focus, dialog, contrast and keyboard testing.
+- [ ] Review all dependencies and distribution notices, including transitive licenses.
+- [ ] Run the workflows from the actual repository root in CI. Workflow files alone do not establish a successful platform build.

@@ -1,0 +1,470 @@
+{
+  "evidence_id": "ev_9a01bcc7f1fa1ad1bd33f362d2394573c35e2f66ff5032c8213c6839891b20ee",
+  "subject": {
+    "name": "C:\\Users\\Garba Ibrahim\\Desktop\\BlueCloud Apps\\cloud apps\\doc-cloud\\output\\playwright\\review.dcloud",
+    "digest": {
+      "sha256": "348e192239ff006ce4958648999c19937c84867541104546bf0b25129b6f9632"
+    },
+    "format": "zip",
+    "architecture": null,
+    "local_path": "C:\\Users\\Garba Ibrahim\\Desktop\\BlueCloud Apps\\cloud apps\\doc-cloud\\output\\playwright\\review.dcloud"
+  },
+  "provider": {
+    "id": "rea-artifact-graph",
+    "name": "REA safe artifact graph provider",
+    "version": "1"
+  },
+  "analysis_profile": null,
+  "predicate_type": "rea.analysis",
+  "operation": "inspect_artifact",
+  "parameters": {
+    "integrity_policy": "fail"
+  },
+  "raw_result": null,
+  "normalized_result": {
+    "inspection_id": "ai_3b081eea5d62a438d68fd1a37cdddd94fe5613c345ffef6cf5b4599f57049e85",
+    "subject": {
+      "manifest_id": "agm_4f77867d13fd4a6494f6834072d94ba83739ec868216191276af99083a7b71d8",
+      "root_artifact_id": "art_0305ec80695d99f54b123818b4050a7322d9dca612daf6098cd0523c89d065cc",
+      "root_sha256": "348e192239ff006ce4958648999c19937c84867541104546bf0b25129b6f9632",
+      "root_format": "zip"
+    },
+    "substeps": [
+      {
+        "substep_id": "ais_084c45dcfcc68968e1155fdab0a037ff34770dc37f94608e0d1ac5853756ce7c",
+        "operation": "inventory_artifact",
+        "status": "completed",
+        "evidence_id": "ev_65ac95a3828dacc9f1823a9315fad550d2bfff8148071d77820e0d90f19e53f3",
+        "evidence": {
+          "evidence_id": "ev_65ac95a3828dacc9f1823a9315fad550d2bfff8148071d77820e0d90f19e53f3",
+          "subject": {
+            "name": "C:\\Users\\Garba Ibrahim\\Desktop\\BlueCloud Apps\\cloud apps\\doc-cloud\\output\\playwright\\review.dcloud",
+            "digest": {
+              "sha256": "348e192239ff006ce4958648999c19937c84867541104546bf0b25129b6f9632"
+            },
+            "format": "zip",
+            "architecture": null,
+            "local_path": "C:\\Users\\Garba Ibrahim\\Desktop\\BlueCloud Apps\\cloud apps\\doc-cloud\\output\\playwright\\review.dcloud"
+          },
+          "provider": {
+            "id": "rea-artifact-graph",
+            "name": "REA safe artifact graph provider",
+            "version": "1"
+          },
+          "analysis_profile": null,
+          "predicate_type": "rea.analysis",
+          "operation": "inventory_artifact",
+          "parameters": {
+            "integrity_policy": "fail"
+          },
+          "raw_result": null,
+          "normalized_result": {
+            "manifest": {
+              "manifest_id": "agm_4f77867d13fd4a6494f6834072d94ba83739ec868216191276af99083a7b71d8",
+              "root_artifact_id": "art_0305ec80695d99f54b123818b4050a7322d9dca612daf6098cd0523c89d065cc",
+              "root_sha256": "348e192239ff006ce4958648999c19937c84867541104546bf0b25129b6f9632",
+              "root_format": "zip",
+              "graph_sha256": "ccabb5aede353ee890abcf52fe9f33921d2dfd044a3b59a7fb6b3ded7f3654e7",
+              "node_count": 9,
+              "occurrence_count": 10,
+              "edge_count": 9
+            },
+            "nodes": [
+              {
+                "artifact_id": "art_0305ec80695d99f54b123818b4050a7322d9dca612daf6098cd0523c89d065cc",
+                "format": "zip",
+                "sha256": "348e192239ff006ce4958648999c19937c84867541104546bf0b25129b6f9632",
+                "size": 2035,
+                "media_type": null,
+                "architecture": null,
+                "content_state": "materialized",
+                "limitations": []
+              },
+              {
+                "artifact_id": "art_2ce0996a9b7b76ce085c2b37ebeed80cff401a73f0c88253d90ec9ec5d6e2c31",
+                "format": "file",
+                "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+                "size": 2,
+                "media_type": null,
+                "architecture": null,
+                "content_state": "embedded",
+                "limitations": []
+              },
+              {
+                "artifact_id": "art_2d4850d7c85f683947e0abe7a692941d9f214abff2c0db0297b315aa88f4a2a8",
+                "format": "file",
+                "sha256": "8dc85d0bbab841ea31b12f699fdf4bde0e56cdb2aaa49af59d8053e1e24ce670",
+                "size": 128,
+                "media_type": null,
+                "architecture": null,
+                "content_state": "embedded",
+                "limitations": []
+              },
+              {
+                "artifact_id": "art_752508b219447916664fcd40d698fbe3eafdcfccfb7ba49f55d6c61eff1ed40d",
+                "format": "file",
+                "sha256": "aa327e83685ad986763d113b4e08c14a394415275c3a777ab79340ad2da2733e",
+                "size": 587,
+                "media_type": null,
+                "architecture": null,
+                "content_state": "embedded",
+                "limitations": []
+              },
+              {
+                "artifact_id": "art_95c5361b1bb96de1f35c3b4ca06d200c1f39c87ab06ccadc068cbeba6256171a",
+                "format": "file",
+                "sha256": "fabebe3fb0fca459dced3a3c6604617eacafd5ad5f8ac8ce6bceae2319810ff6",
+                "size": 278,
+                "media_type": null,
+                "architecture": null,
+                "content_state": "embedded",
+                "limitations": []
+              },
+              {
+                "artifact_id": "art_bfdfc45a7637b28f8898c5705ba36dd82f989cf0d33a7ada9de71021820968d1",
+                "format": "file",
+                "sha256": "3a937b741960e820d037da34940da80588220f202f4b715bc202534ca81d9583",
+                "size": 537,
+                "media_type": null,
+                "architecture": null,
+                "content_state": "embedded",
+                "limitations": []
+              },
+              {
+                "artifact_id": "art_c2bc3646e4f623500d2db9f06ef77f546db4313754afbcfdac6dde619893a89c",
+                "format": "directory",
+                "sha256": "7d5ee5f4ffe6ba7d3f7e658bc7544c5f21e0f442b5aeded948533d44c090163c",
+                "size": 0,
+                "media_type": null,
+                "architecture": null,
+                "content_state": "virtual",
+                "limitations": []
+              },
+              {
+                "artifact_id": "art_f0f535a0e7d49911813c884ccb9cdafce8c6b2c4cd911bc76753115b39f64e80",
+                "format": "file",
+                "sha256": "a817b4f5e2683aa1e30ced6f73e8bdd58de0100c0c386020d08e5297ca0b3c38",
+                "size": 220,
+                "media_type": null,
+                "architecture": null,
+                "content_state": "embedded",
+                "limitations": []
+              },
+              {
+                "artifact_id": "art_f49d1dbd2dba61fe3bd6e247f461872de8bbc138fcdfc3a9496952ab2fe25014",
+                "format": "file",
+                "sha256": "f50a64720dedf8a3908fdde0d50c76a5bc501068600cc2e2100e00bca4a2f30a",
+                "size": 280,
+                "media_type": null,
+                "architecture": null,
+                "content_state": "embedded",
+                "limitations": []
+              }
+            ],
+            "occurrences": [
+              {
+                "occurrence_id": "occ_05c5bd50e3eb7d533013afc1a1731a2585f75fb6e8cde773be159109610ff28b",
+                "artifact_id": "art_0305ec80695d99f54b123818b4050a7322d9dca612daf6098cd0523c89d065cc",
+                "parent_occurrence_id": null,
+                "logical_path": ".",
+                "entry_kind": "file",
+                "artifact_kind": "container",
+                "artifact_format": "zip",
+                "declared_size": 2035,
+                "compressed_size": null,
+                "executable": false,
+                "encrypted": false,
+                "hash_status": "verified",
+                "source_location": null,
+                "limitations": []
+              },
+              {
+                "occurrence_id": "occ_cb99e636c0d74da2d56e0a5823f3a22cb03fafc6835501722be0d80c9bdf5d84",
+                "artifact_id": "art_c2bc3646e4f623500d2db9f06ef77f546db4313754afbcfdac6dde619893a89c",
+                "parent_occurrence_id": "occ_05c5bd50e3eb7d533013afc1a1731a2585f75fb6e8cde773be159109610ff28b",
+                "logical_path": "assets",
+                "entry_kind": "directory",
+                "artifact_kind": "container",
+                "artifact_format": "directory",
+                "declared_size": null,
+                "compressed_size": null,
+                "executable": false,
+                "encrypted": false,
+                "hash_status": "verified",
+                "source_location": null,
+                "limitations": []
+              },
+              {
+                "occurrence_id": "occ_3ab704266cf2bc1a585700f9462103ab27db80fd50c5fa3730954895ff2758ab",
+                "artifact_id": "art_f49d1dbd2dba61fe3bd6e247f461872de8bbc138fcdfc3a9496952ab2fe25014",
+                "parent_occurrence_id": "occ_05c5bd50e3eb7d533013afc1a1731a2585f75fb6e8cde773be159109610ff28b",
+                "logical_path": "comments.json",
+                "entry_kind": "file",
+                "artifact_kind": "resource",
+                "artifact_format": "file",
+                "declared_size": 280,
+                "compressed_size": 192,
+                "executable": false,
+                "encrypted": false,
+                "hash_status": "verified",
+                "source_location": null,
+                "limitations": []
+              },
+              {
+                "occurrence_id": "occ_72a6dc44408c10488c046fa902460488ecace7ed77bb7d922f081e7937a9be64",
+                "artifact_id": "art_bfdfc45a7637b28f8898c5705ba36dd82f989cf0d33a7ada9de71021820968d1",
+                "parent_occurrence_id": "occ_05c5bd50e3eb7d533013afc1a1731a2585f75fb6e8cde773be159109610ff28b",
+                "logical_path": "content.json",
+                "entry_kind": "file",
+                "artifact_kind": "resource",
+                "artifact_format": "file",
+                "declared_size": 537,
+                "compressed_size": 222,
+                "executable": false,
+                "encrypted": false,
+                "hash_status": "verified",
+                "source_location": null,
+                "limitations": []
+              },
+              {
+                "occurrence_id": "occ_6412ca71179ce1c56bdd79b7d12c3d4dddc60b9c297c5ca3b8a91e397ea53645",
+                "artifact_id": "art_2d4850d7c85f683947e0abe7a692941d9f214abff2c0db0297b315aa88f4a2a8",
+                "parent_occurrence_id": "occ_05c5bd50e3eb7d533013afc1a1731a2585f75fb6e8cde773be159109610ff28b",
+                "logical_path": "headerFooter.json",
+                "entry_kind": "file",
+                "artifact_kind": "resource",
+                "artifact_format": "file",
+                "declared_size": 128,
+                "compressed_size": 55,
+                "executable": false,
+                "encrypted": false,
+                "hash_status": "verified",
+                "source_location": null,
+                "limitations": []
+              },
+              {
+                "occurrence_id": "occ_2a29a8ffdc7ccf54be50bbeff55a58c10ab247b88e09a5d1f90444727df3f291",
+                "artifact_id": "art_f0f535a0e7d49911813c884ccb9cdafce8c6b2c4cd911bc76753115b39f64e80",
+                "parent_occurrence_id": "occ_05c5bd50e3eb7d533013afc1a1731a2585f75fb6e8cde773be159109610ff28b",
+                "logical_path": "manifest.json",
+                "entry_kind": "file",
+                "artifact_kind": "resource",
+                "artifact_format": "file",
+                "declared_size": 220,
+                "compressed_size": 148,
+                "executable": false,
+                "encrypted": false,
+                "hash_status": "verified",
+                "source_location": null,
+                "limitations": []
+              },
+              {
+                "occurrence_id": "occ_fff93119113d8572c00df4b638dd3b2b9e6eb4d80944a027da5c2e3cb6bd5f3e",
+                "artifact_id": "art_95c5361b1bb96de1f35c3b4ca06d200c1f39c87ab06ccadc068cbeba6256171a",
+                "parent_occurrence_id": "occ_05c5bd50e3eb7d533013afc1a1731a2585f75fb6e8cde773be159109610ff28b",
+                "logical_path": "metadata.json",
+                "entry_kind": "file",
+                "artifact_kind": "resource",
+                "artifact_format": "file",
+                "declared_size": 278,
+                "compressed_size": 181,
+                "executable": false,
+                "encrypted": false,
+                "hash_status": "verified",
+                "source_location": null,
+                "limitations": []
+              },
+              {
+                "occurrence_id": "occ_147a9383f6850f3c537522ba27ad5abce3c3974b13555c353863a66b906e9b6d",
+                "artifact_id": "art_2ce0996a9b7b76ce085c2b37ebeed80cff401a73f0c88253d90ec9ec5d6e2c31",
+                "parent_occurrence_id": "occ_05c5bd50e3eb7d533013afc1a1731a2585f75fb6e8cde773be159109610ff28b",
+                "logical_path": "revisions.json",
+                "entry_kind": "file",
+                "artifact_kind": "resource",
+                "artifact_format": "file",
+                "declared_size": 2,
+                "compressed_size": 4,
+                "executable": false,
+                "encrypted": false,
+                "hash_status": "verified",
+                "source_location": null,
+                "limitations": []
+              },
+              {
+                "occurrence_id": "occ_dda22b4fc638b0991e266c1135504eb39429e569fc469e4f36cbdf0d2405b4da",
+                "artifact_id": "art_752508b219447916664fcd40d698fbe3eafdcfccfb7ba49f55d6c61eff1ed40d",
+                "parent_occurrence_id": "occ_05c5bd50e3eb7d533013afc1a1731a2585f75fb6e8cde773be159109610ff28b",
+                "logical_path": "settings.json",
+                "entry_kind": "file",
+                "artifact_kind": "resource",
+                "artifact_format": "file",
+                "declared_size": 587,
+                "compressed_size": 287,
+                "executable": false,
+                "encrypted": false,
+                "hash_status": "verified",
+                "source_location": null,
+                "limitations": []
+              },
+              {
+                "occurrence_id": "occ_08920f6beac772281a3bdf8b6f422e80989cf7c5291e49287c6231f97f4a33e5",
+                "artifact_id": "art_2ce0996a9b7b76ce085c2b37ebeed80cff401a73f0c88253d90ec9ec5d6e2c31",
+                "parent_occurrence_id": "occ_05c5bd50e3eb7d533013afc1a1731a2585f75fb6e8cde773be159109610ff28b",
+                "logical_path": "suggestions.json",
+                "entry_kind": "file",
+                "artifact_kind": "resource",
+                "artifact_format": "file",
+                "declared_size": 2,
+                "compressed_size": 4,
+                "executable": false,
+                "encrypted": false,
+                "hash_status": "verified",
+                "source_location": null,
+                "limitations": []
+              }
+            ],
+            "edges": [
+              {
+                "edge_id": "edge_0d86e1151297698ac42e16b0d6cc8dde364126c3d7abfed4c354dc1f80dece21",
+                "ordinal": 0,
+                "parent_artifact_id": "art_0305ec80695d99f54b123818b4050a7322d9dca612daf6098cd0523c89d065cc",
+                "relation": "contains",
+                "occurrence_id": "occ_147a9383f6850f3c537522ba27ad5abce3c3974b13555c353863a66b906e9b6d",
+                "producer": null
+              },
+              {
+                "edge_id": "edge_3c2dad2e335b5123355b8a610827d987ac1c36695b2c4eb3e1171014fd70527f",
+                "ordinal": 1,
+                "parent_artifact_id": "art_0305ec80695d99f54b123818b4050a7322d9dca612daf6098cd0523c89d065cc",
+                "relation": "contains",
+                "occurrence_id": "occ_cb99e636c0d74da2d56e0a5823f3a22cb03fafc6835501722be0d80c9bdf5d84",
+                "producer": null
+              },
+              {
+                "edge_id": "edge_a3209de79cba26de5fff40b0de669261ac4b4f4955d0c4890fb1ad69d1b4409f",
+                "ordinal": 2,
+                "parent_artifact_id": "art_0305ec80695d99f54b123818b4050a7322d9dca612daf6098cd0523c89d065cc",
+                "relation": "contains",
+                "occurrence_id": "occ_3ab704266cf2bc1a585700f9462103ab27db80fd50c5fa3730954895ff2758ab",
+                "producer": null
+              },
+              {
+                "edge_id": "edge_a72ed2fa0fa796ca2cd0a35ba7f4d4dcc5d7ff06ce0cf5c006177bff1f1dc0ee",
+                "ordinal": 3,
+                "parent_artifact_id": "art_0305ec80695d99f54b123818b4050a7322d9dca612daf6098cd0523c89d065cc",
+                "relation": "contains",
+                "occurrence_id": "occ_dda22b4fc638b0991e266c1135504eb39429e569fc469e4f36cbdf0d2405b4da",
+                "producer": null
+              },
+              {
+                "edge_id": "edge_cc7145240d18d806cd4f7b0356311e7ceb8b4d7f17737d7bbd1372b22b29c5a4",
+                "ordinal": 4,
+                "parent_artifact_id": "art_0305ec80695d99f54b123818b4050a7322d9dca612daf6098cd0523c89d065cc",
+                "relation": "contains",
+                "occurrence_id": "occ_6412ca71179ce1c56bdd79b7d12c3d4dddc60b9c297c5ca3b8a91e397ea53645",
+                "producer": null
+              },
+              {
+                "edge_id": "edge_ccc83c0fe59eb2607542bfe55c095f28973d492d55bf79ef27390b95fb1d5e91",
+                "ordinal": 5,
+                "parent_artifact_id": "art_0305ec80695d99f54b123818b4050a7322d9dca612daf6098cd0523c89d065cc",
+                "relation": "contains",
+                "occurrence_id": "occ_08920f6beac772281a3bdf8b6f422e80989cf7c5291e49287c6231f97f4a33e5",
+                "producer": null
+              },
+              {
+                "edge_id": "edge_d5f2d15118e2d7044d2b6821cd31ea01f8c0cc5e4f2fdf9371b0fbafb3cd1477",
+                "ordinal": 6,
+                "parent_artifact_id": "art_0305ec80695d99f54b123818b4050a7322d9dca612daf6098cd0523c89d065cc",
+                "relation": "contains",
+                "occurrence_id": "occ_fff93119113d8572c00df4b638dd3b2b9e6eb4d80944a027da5c2e3cb6bd5f3e",
+                "producer": null
+              },
+              {
+                "edge_id": "edge_e9e9cef08c44d24d5f1dbfa7fcbbee51c0e129ab57841ea2af40126852bf2eb1",
+                "ordinal": 7,
+                "parent_artifact_id": "art_0305ec80695d99f54b123818b4050a7322d9dca612daf6098cd0523c89d065cc",
+                "relation": "contains",
+                "occurrence_id": "occ_72a6dc44408c10488c046fa902460488ecace7ed77bb7d922f081e7937a9be64",
+                "producer": null
+              },
+              {
+                "edge_id": "edge_f709f5fff651cbfe6ca3e58901515b8636da04bfea2f7ba825c673971f0b3c1c",
+                "ordinal": 8,
+                "parent_artifact_id": "art_0305ec80695d99f54b123818b4050a7322d9dca612daf6098cd0523c89d065cc",
+                "relation": "contains",
+                "occurrence_id": "occ_2a29a8ffdc7ccf54be50bbeff55a58c10ab247b88e09a5d1f90444727df3f291",
+                "producer": null
+              }
+            ],
+            "provenance": [],
+            "integrity_contradictions": [],
+            "limitations": [
+              "ZIP inventory lists central-directory entries only. Bytes after the central directory, including an APK Signing Block or a ZIP comment, are not occurrences."
+            ]
+          },
+          "confidence": "observed",
+          "authority": "shipped-artifact",
+          "environment": null,
+          "limitations": [
+            "ZIP inventory lists central-directory entries only. Bytes after the central directory, including an APK Signing Block or a ZIP comment, are not occurrences."
+          ],
+          "locations": [],
+          "evidence_links": []
+        }
+      }
+    ],
+    "observations": [
+      {
+        "observation_id": "aio_eb3b88fa45512e7179339375701133b681ada8b61d23350de15a460bb6305770",
+        "kind": "root-manifest",
+        "subject": "art_0305ec80695d99f54b123818b4050a7322d9dca612daf6098cd0523c89d065cc",
+        "value": {
+          "manifest_id": "agm_4f77867d13fd4a6494f6834072d94ba83739ec868216191276af99083a7b71d8",
+          "root_artifact_id": "art_0305ec80695d99f54b123818b4050a7322d9dca612daf6098cd0523c89d065cc",
+          "root_sha256": "348e192239ff006ce4958648999c19937c84867541104546bf0b25129b6f9632",
+          "root_format": "zip",
+          "graph_sha256": "ccabb5aede353ee890abcf52fe9f33921d2dfd044a3b59a7fb6b3ded7f3654e7",
+          "node_count": 9,
+          "occurrence_count": 10,
+          "edge_count": 9
+        },
+        "evidence_id": "ev_65ac95a3828dacc9f1823a9315fad550d2bfff8148071d77820e0d90f19e53f3"
+      }
+    ],
+    "hypotheses": [],
+    "contradictions": [],
+    "unexplored_branches": [],
+    "next_probes": [],
+    "coverage": {
+      "status": "complete-within-substeps",
+      "substeps_completed": 1,
+      "observations_retained": 1,
+      "observations_omitted": 0,
+      "hypotheses_retained": 0,
+      "hypotheses_omitted": 0,
+      "unexplored_branches_retained": 0,
+      "unexplored_branches_omitted": 0,
+      "next_probes_retained": 0,
+      "next_probes_omitted": 0
+    },
+    "evidence_links": [
+      "ev_65ac95a3828dacc9f1823a9315fad550d2bfff8148071d77820e0d90f19e53f3"
+    ],
+    "limitations": [
+      "Inspection derives bounded static hypotheses and next probes; it does not execute the artifact or claim format-specific semantics.",
+      "ZIP inventory lists central-directory entries only. Bytes after the central directory, including an APK Signing Block or a ZIP comment, are not occurrences."
+    ]
+  },
+  "confidence": "observed",
+  "authority": "shipped-artifact",
+  "environment": null,
+  "limitations": [
+    "Inspection derives bounded static hypotheses and next probes; it does not execute the artifact or claim format-specific semantics.",
+    "ZIP inventory lists central-directory entries only. Bytes after the central directory, including an APK Signing Block or a ZIP comment, are not occurrences."
+  ],
+  "locations": [],
+  "evidence_links": [
+    "ev_65ac95a3828dacc9f1823a9315fad550d2bfff8148071d77820e0d90f19e53f3"
+  ]
+}

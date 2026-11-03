@@ -1,0 +1,23 @@
+[package]
+name = "doc-cloud"
+version = "1.0.0"
+description = "Doc Cloud Desktop Word Processor"
+authors = ["BlueCloud AI Technologies"]
+edition = "2021"
+
+[build-dependencies]
+tauri-build = { version = "2.0.0", features = [] }
+
+[dependencies]
+tauri = { version = "2.0.0", features = [] }
+tauri-plugin-fs = "2.0.0"
+tauri-plugin-dialog = "2.0.0"
+tauri-plugin-shell = "2.0.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+rusqlite = { version = "0.32", features = ["bundled"] }
+uuid = { version = "1.10", features = ["v4", "fast-rng"] }
+chrono = { version = "0.4", features = ["serde"] }
+thiserror = "1.0"
+
+tempfile = "3"

@@ -1,0 +1,16 @@
+[
+  {
+    "file": "releases/windows/doc-cloud-1.0.0-win-x64.zip",
+    "bytes": 6186283,
+    "sha256": "208eaee2fd6c046b5cf5b9dd04e0ab6eb0c1310d6472e8e0641dfafc634f5654",
+    "build": "unsigned Windows x64 release-mode alpha",
+    "installation_tested": false
+  },
+  {
+    "file": "releases/windows/Doc-Cloud-1.0.0-x64-setup.exe",
+    "bytes": 4872499,
+    "sha256": "8509b4bbea911a69674ba91c12b09c7307c7e466ca532ecfbd50f914bd413a13",
+    "build": "unsigned Windows x64 release-mode alpha",
+    "installation_tested": false
+  }
+]
