@@ -16,8 +16,10 @@ export function PagedEditor({ editor, doc, zoom, rulers, onPages }: { editor: Ed
   const s = doc.settings;
   const dims = getPageDimensions(s.format, s.orientation, s.customWidthMm, s.customHeightMm);
   const bodyHeight = dims.heightPx - s.margins.topPx - s.margins.bottomPx;
+  const continuous = !!s.pageless || s.columns > 1;
 
   useEffect(() => {
+    if (continuous) { setPages(1); onPages(1); setOversized(false); return; }
     editor.registerPlugin(new Plugin({
       key,
       state: { init: () => DecorationSet.empty, apply: (tr, value) => tr.getMeta(key) ?? value.map(tr.mapping, tr.doc) },
@@ -62,7 +64,14 @@ export function PagedEditor({ editor, doc, zoom, rulers, onPages }: { editor: Ed
       cancelAnimationFrame(frame); observer.disconnect(); editor.off('transaction', onTransaction);
       editor.view.dom.removeEventListener('load', measure, true); editor.unregisterPlugin(key);
     };
-  }, [editor, doc.metadata.id, bodyHeight, s.margins.topPx, s.margins.bottomPx, zoom, onPages]);
+  }, [editor, doc.metadata.id, bodyHeight, s.margins.topPx, s.margins.bottomPx, zoom, onPages, continuous]);
+
+  if (continuous) return <div className="document-scroll">
+    {s.columns > 1 && <div className="layout-warning" role="status">Columns use a continuous preview. Physical page breaks are applied when printing.</div>}
+    <div className="page-content continuous-paper" data-layout={s.pageless ? 'pageless' : 'columns'} style={{ background: 'white', margin: '0 auto', width: s.pageless ? '100%' : dims.widthPx * zoom, maxWidth: s.pageless ? 1100 : undefined, minHeight: '80vh', padding: 48, fontSize: `${zoom}em` }}>
+      <EditorContent editor={editor} style={{ columnCount: s.columns, columnGap: `${s.columnGapMm}mm` }} />
+    </div>
+  </div>;
 
   const fullHeight = pages * dims.heightPx + (pages - 1) * GAP;
   return <div className="document-scroll">

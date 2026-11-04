@@ -30,7 +30,8 @@ export function createPrintLayout(editor: Editor, doc: DocCloudFilePackage, zoom
     });
   });
 
-  const layout = paginateBlocks(
+  const continuous = !!s.pageless || s.columns > 1;
+  const layout = continuous ? { gaps: [], oversized: false } : paginateBlocks(
     blocks,
     dims.heightPx - s.margins.topPx - s.margins.bottomPx,
     s.margins.topPx + s.margins.bottomPx + 28
@@ -78,6 +79,7 @@ export function createPrintLayout(editor: Editor, doc: DocCloudFilePackage, zoom
   }pt;transform:rotate(${s.watermark?.angle || -45}deg);opacity:${s.watermark?.opacity || 0.12};color:${
     s.watermark?.color || '#64748b'
   }}
+  ${continuous ? `@page{margin:${s.margins.topMm}mm ${s.margins.rightMm}mm ${s.margins.bottomMm}mm ${s.margins.leftMm}mm}.print-page{width:auto;height:auto;padding:0;overflow:visible;break-after:auto}.print-fields,.watermark{display:none}.print-body{column-count:${s.columns};column-fill:balance}.print-body>*{break-inside:avoid}` : ''}
   </style></head><body>${groups
     .map(
       (html, i) =>

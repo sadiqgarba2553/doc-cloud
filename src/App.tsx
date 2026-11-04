@@ -161,6 +161,7 @@ export default function App() {
       },
     },
     onUpdate: ({ editor: e }) => {
+      if (baseContentBeforePreview.current) return;
       const text = e.getText();
       const words = countWords(text);
       setDoc(prev => ({
@@ -321,6 +322,9 @@ export default function App() {
       setTrack(false);
       setCommentsOpen(false);
       setPreviewActive(false);
+      baseContentBeforePreview.current = null;
+      editor?.setEditable(true);
+      setRecipients([]); setAvailableFields([]); setCurrentRecordIndex(0);
     } catch (error) {
       setFailure(`Could not switch documents: ${String(error)}`);
     }
@@ -558,9 +562,11 @@ export default function App() {
   // --- Mail Merge Handlers ---
   const handleImportMailMergeCsv = (file: File) => {
     const reader = new FileReader();
+    reader.onerror = () => setFailure('Could not read the recipient CSV.');
     reader.onload = e => {
       const text = String(e.target?.result || '');
-      const parsedRecipients = parseMailMergeCsv(text);
+      let parsedRecipients: RecipientRecord[];
+      try { parsedRecipients = parseMailMergeCsv(text); } catch (error) { setFailure(String(error)); return; }
       if (parsedRecipients.length === 0) {
         setFailure('CSV contains no valid recipient records.');
         return;
@@ -590,12 +596,15 @@ export default function App() {
       const currentRec = recipients[currentRecordIndex];
       const mergedContent = applyMailMergeToContent(baseContentBeforePreview.current, currentRec);
       editor.commands.setContent(mergedContent, { emitUpdate: false });
+      editor.setEditable(false);
       setPreviewActive(true);
     } else {
       if (baseContentBeforePreview.current) {
         editor.commands.setContent(baseContentBeforePreview.current, { emitUpdate: false });
       }
       setPreviewActive(false);
+      baseContentBeforePreview.current = null;
+      editor.setEditable(true);
     }
   };
 
@@ -614,7 +623,7 @@ export default function App() {
       setFailure('Select a recipient list first.');
       return;
     }
-    const basePkg = doc;
+    const basePkg = { ...doc, content: baseContentBeforePreview.current || doc.content };
     const mergedPackages = generateMailMergePackages(basePkg, recipients);
     for (const pkg of mergedPackages) {
       await documentStore.save(pkg);

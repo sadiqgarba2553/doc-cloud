@@ -1,19 +1,19 @@
 {
   "appId": "doc-cloud",
   "repository": "sadiqgarba2553/doc-cloud",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "sourceName": "Doc-Cloud",
-  "title": "Doc Cloud 1.0.0 - Windows alpha",
-  "notes": "First Windows alpha: new squircle document logo, local document library and autosave, rich text editing, editable templates, local comments and named history, native document backups and basic DOCX, text, Markdown, HTML and RTF exchange. Updated Windows build and launcher package systems. Limited Office conversion; no hosted collaboration.",
+  "title": "Doc Cloud 1.1.0 — Office expansion alpha",
+  "notes": "Pageless drafting and continuous column previews, CSV mail merge with recipient previews and batch documents, table-of-contents snapshots, and fixes for template preservation and document layout. Existing document libraries and blue squircle branding are preserved. Advanced Office conversion and hosted collaboration remain limited.",
   "localAssets": [
-    "releases/windows/doc-cloud-1.0.0-win-x64.zip",
-    "releases/windows/Doc-Cloud-1.0.0-x64-setup.exe"
+    "releases/windows/doc-cloud-1.1.0-win-x64.zip",
+    "releases/windows/Doc-Cloud-1.1.0-x64-setup.exe"
   ],
-  "unpackedDirectory": "releases/windows/managed",
+  "unpackedDirectory": "releases/windows/managed-1.1.0",
   "package": {
-    "name": "doc-cloud-1.0.0-win-x64.zip",
+    "name": "doc-cloud-1.1.0-win-x64.zip",
     "type": "zip",
-    "minimumLauncher": "0.7.1",
+    "minimumLauncher": "0.7.2",
     "executable": "doc-cloud.exe"
   }
 }

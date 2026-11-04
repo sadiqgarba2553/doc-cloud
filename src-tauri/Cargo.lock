@@ -679,7 +679,7 @@ dependencies = [
 
 [[package]]
 name = "doc-cloud"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "chrono",
  "rusqlite",

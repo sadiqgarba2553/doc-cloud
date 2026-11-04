@@ -43,9 +43,11 @@ export function parseMailMergeCsv(csvText: string): RecipientRecord[] {
     if (row.some(f => f.length > 0)) rows.push(row);
   }
 
+  if (inQuotes) throw new Error('CSV contains an unclosed quoted field.');
   if (rows.length < 2) return [];
 
   const headers = rows[0].map(h => h.replace(/^["']|["']$/g, '').trim());
+  if (headers.some(h => !h || ['__proto__', 'constructor', 'prototype'].includes(h)) || new Set(headers).size !== headers.length) throw new Error('CSV headers must be nonempty, unique field names.');
   const records: RecipientRecord[] = [];
 
   for (let r = 1; r < rows.length; r++) {
@@ -99,15 +101,17 @@ export function applyMailMergeToContent(contentNode: any, record: RecipientRecor
   if (!contentNode) return contentNode;
 
   if (contentNode.type === 'text' && typeof contentNode.text === 'string') {
+    const text = replaceMergeFieldsInString(contentNode.text, record);
+    if (!text) return null;
     return {
       ...contentNode,
-      text: replaceMergeFieldsInString(contentNode.text, record),
+      text,
     };
   }
 
   const cloned: any = { ...contentNode };
   if (Array.isArray(contentNode.content)) {
-    cloned.content = contentNode.content.map((child: any) => applyMailMergeToContent(child, record));
+    cloned.content = contentNode.content.map((child: any) => applyMailMergeToContent(child, record)).filter(Boolean);
   }
   return cloned;
 }
@@ -130,6 +134,7 @@ export function generateMailMergePackages(
         ...basePackage.metadata,
         id: crypto.randomUUID(),
         title: mergedTitle,
+        filePath: undefined,
         updatedAt: new Date().toISOString(),
       },
       content: applyMailMergeToContent(basePackage.content, rec),
