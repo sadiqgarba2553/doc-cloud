@@ -1,10 +1,11 @@
 export type PaperFormat = 'A4' | 'Letter' | 'Legal' | 'A3' | 'A5' | 'Executive' | 'Custom';
 export type Orientation = 'portrait' | 'landscape';
+export type SectionBreakType = 'nextPage' | 'continuous' | 'evenPage' | 'oddPage';
 
 export interface PageDimensions {
   widthMm: number;
   heightMm: number;
-  widthPx: number;  // at 96 DPI (1 inch = 96 px = 25.4 mm)
+  widthPx: number; // at 96 DPI (1 inch = 96 px = 25.4 mm)
   heightPx: number;
 }
 
@@ -23,10 +24,18 @@ export interface PageMargins {
 export interface MarginPreset {
   name: string;
   description: string;
-  top: number;    // in mm
+  top: number; // in mm
   bottom: number; // in mm
-  left: number;   // in mm
-  right: number;  // in mm
+  left: number; // in mm
+  right: number; // in mm
+}
+
+export interface DocumentSection {
+  id: string;
+  name?: string;
+  startPos: number;
+  type: SectionBreakType;
+  settings?: Partial<PageSettings>;
 }
 
 export interface PageSettings {
@@ -36,6 +45,7 @@ export interface PageSettings {
   customHeightMm?: number;
   margins: PageMargins;
   marginPreset: 'normal' | 'narrow' | 'moderate' | 'wide' | 'custom';
+  pageless?: boolean;
   differentFirstPage: boolean;
   differentOddEven: boolean;
   headerDistanceMm: number;
@@ -60,4 +70,12 @@ export interface HeaderFooterContent {
   footerLeft: string;
   footerCenter: string;
   footerRight: string;
+  firstPageHeaderLeft?: string;
+  firstPageHeaderCenter?: string;
+  firstPageHeaderRight?: string;
+  firstPageFooterLeft?: string;
+  firstPageFooterCenter?: string;
+  firstPageFooterRight?: string;
+  evenPageHeaderCenter?: string;
+  evenPageFooterCenter?: string;
 }

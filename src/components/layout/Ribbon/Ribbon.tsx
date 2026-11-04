@@ -4,12 +4,22 @@ import { HomeTab } from './Tabs/HomeTab';
 import { InsertTab } from './Tabs/InsertTab';
 import { LayoutTab } from './Tabs/LayoutTab';
 import { ReferencesTab } from './Tabs/ReferencesTab';
+import { MailingsTab } from './Tabs/MailingsTab';
 import { ReviewTab } from './Tabs/ReviewTab';
 import { ViewTab } from './Tabs/ViewTab';
 import { HelpTab } from './Tabs/HelpTab';
 import { PageSettings } from '../../../types/layout';
 
-export type RibbonTabKey = 'file' | 'home' | 'insert' | 'layout' | 'references' | 'review' | 'view' | 'help';
+export type RibbonTabKey =
+  | 'file'
+  | 'home'
+  | 'insert'
+  | 'layout'
+  | 'references'
+  | 'mailings'
+  | 'review'
+  | 'view'
+  | 'help';
 
 interface RibbonProps {
   editor: Editor | null;
@@ -48,6 +58,17 @@ interface RibbonProps {
   onZoomChange: (newZoom: number) => void;
   theme: 'light' | 'dark' | 'system';
   onThemeToggle: () => void;
+  // Mail merge props
+  recipientsCount?: number;
+  availableFields?: string[];
+  currentRecordIndex?: number;
+  previewActive?: boolean;
+  onImportCsvFile?: (file: File) => void;
+  onInsertField?: (field: string) => void;
+  onTogglePreview?: () => void;
+  onPrevRecord?: () => void;
+  onNextRecord?: () => void;
+  onFinishMerge?: () => void;
 }
 
 export const Ribbon: React.FC<RibbonProps> = ({
@@ -87,6 +108,16 @@ export const Ribbon: React.FC<RibbonProps> = ({
   onZoomChange,
   theme,
   onThemeToggle,
+  recipientsCount = 0,
+  availableFields = [],
+  currentRecordIndex = 0,
+  previewActive = false,
+  onImportCsvFile = () => {},
+  onInsertField = () => {},
+  onTogglePreview = () => {},
+  onPrevRecord = () => {},
+  onNextRecord = () => {},
+  onFinishMerge = () => {},
 }) => {
   const [activeTab, setActiveTab] = useState<RibbonTabKey>('home');
 
@@ -96,6 +127,7 @@ export const Ribbon: React.FC<RibbonProps> = ({
     { key: 'insert', label: 'Insert' },
     { key: 'layout', label: 'Layout' },
     { key: 'references', label: 'References' },
+    { key: 'mailings', label: 'Mailings' },
     { key: 'review', label: 'Review' },
     { key: 'view', label: 'View' },
     { key: 'help', label: 'Help' },
@@ -167,6 +199,20 @@ export const Ribbon: React.FC<RibbonProps> = ({
           <ReferencesTab
             editor={editor}
             onOpenFootnoteModal={onOpenFootnoteModal}
+          />
+        )}
+        {activeTab === 'mailings' && (
+          <MailingsTab
+            recipientsCount={recipientsCount}
+            availableFields={availableFields}
+            currentRecordIndex={currentRecordIndex}
+            previewActive={previewActive}
+            onImportCsvFile={onImportCsvFile}
+            onInsertField={onInsertField}
+            onTogglePreview={onTogglePreview}
+            onPrevRecord={onPrevRecord}
+            onNextRecord={onNextRecord}
+            onFinishMerge={onFinishMerge}
           />
         )}
         {activeTab === 'review' && (

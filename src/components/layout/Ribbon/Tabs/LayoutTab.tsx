@@ -7,6 +7,8 @@ import {
   Stamp,
   Sliders,
   Hash,
+  ScrollText,
+  FileText,
 } from 'lucide-react';
 import { PageSettings, PaperFormat, Orientation } from '../../../../types/layout';
 import { MARGIN_PRESETS, createPageMargins } from '../../../../core/layout/PageGeometry';
@@ -25,12 +27,44 @@ export const LayoutTab: React.FC<LayoutTabProps> = ({
 }) => {
   return (
     <div className="flex items-center space-x-2 py-1 px-1 overflow-x-auto text-surface-700 dark:text-surface-300">
+      {/* Mode: Paged vs Pageless */}
+      <div className="flex flex-col space-y-1 border-r border-surface-200 dark:border-surface-800 pr-2">
+        <span className="text-[10px] font-semibold text-surface-500 uppercase tracking-wider px-1">Layout Mode</span>
+        <div className="flex items-center space-x-0.5">
+          <button
+            onClick={() => onUpdateSettings((prev) => ({ ...prev, pageless: false }))}
+            className={`px-2 py-0.5 text-xs rounded border transition-colors flex items-center gap-1 ${
+              !settings.pageless
+                ? 'bg-sky-100 text-sky-800 border-sky-400 dark:bg-sky-950 dark:text-sky-300 font-semibold'
+                : 'border-surface-200 dark:border-surface-700 hover:bg-surface-100 dark:hover:bg-surface-800'
+            }`}
+            title="Pages with paper margins and headers/footers"
+          >
+            <FileText className="w-3.5 h-3.5" />
+            Paged
+          </button>
+          <button
+            onClick={() => onUpdateSettings((prev) => ({ ...prev, pageless: true }))}
+            className={`px-2 py-0.5 text-xs rounded border transition-colors flex items-center gap-1 ${
+              settings.pageless
+                ? 'bg-sky-100 text-sky-800 border-sky-400 dark:bg-sky-950 dark:text-sky-300 font-semibold'
+                : 'border-surface-200 dark:border-surface-700 hover:bg-surface-100 dark:hover:bg-surface-800'
+            }`}
+            title="Continuous canvas without page breaks"
+          >
+            <ScrollText className="w-3.5 h-3.5" />
+            Pageless
+          </button>
+        </div>
+      </div>
+
       {/* Margins */}
       <div className="flex flex-col space-y-1 border-r border-surface-200 dark:border-surface-800 pr-2">
         <span className="text-[10px] font-semibold text-surface-500 uppercase tracking-wider px-1">Margins</span>
         <div className="flex items-center space-x-1">
           <select
             value={settings.marginPreset}
+            disabled={settings.pageless}
             onChange={(e) => {
               const preset = e.target.value as any;
               if (preset in MARGIN_PRESETS) {
@@ -44,7 +78,7 @@ export const LayoutTab: React.FC<LayoutTabProps> = ({
                 onOpenPageSetup();
               }
             }}
-            className="h-6 px-1.5 text-xs bg-surface-50 dark:bg-surface-800 border border-surface-300 dark:border-surface-700 rounded text-surface-900 dark:text-surface-100 outline-none w-28"
+            className="h-6 px-1.5 text-xs bg-surface-50 dark:bg-surface-800 border border-surface-300 dark:border-surface-700 rounded text-surface-900 dark:text-surface-100 outline-none w-28 disabled:opacity-50"
           >
             <option value="normal">Normal (1")</option>
             <option value="narrow">Narrow (0.5")</option>
@@ -67,21 +101,23 @@ export const LayoutTab: React.FC<LayoutTabProps> = ({
         <span className="text-[10px] font-semibold text-surface-500 uppercase tracking-wider px-1">Orientation</span>
         <div className="flex items-center space-x-0.5">
           <button
+            disabled={settings.pageless}
             onClick={() => onUpdateSettings((prev) => ({ ...prev, orientation: 'portrait' }))}
             className={`px-2 py-0.5 text-xs rounded border transition-colors ${
-              settings.orientation === 'portrait'
+              settings.orientation === 'portrait' && !settings.pageless
                 ? 'bg-sky-100 text-sky-800 border-sky-400 dark:bg-sky-950 dark:text-sky-300 font-semibold'
-                : 'border-surface-200 dark:border-surface-700 hover:bg-surface-100 dark:hover:bg-surface-800'
+                : 'border-surface-200 dark:border-surface-700 hover:bg-surface-100 dark:hover:bg-surface-800 disabled:opacity-50'
             }`}
           >
             Portrait
           </button>
           <button
+            disabled={settings.pageless}
             onClick={() => onUpdateSettings((prev) => ({ ...prev, orientation: 'landscape' }))}
             className={`px-2 py-0.5 text-xs rounded border transition-colors ${
-              settings.orientation === 'landscape'
+              settings.orientation === 'landscape' && !settings.pageless
                 ? 'bg-sky-100 text-sky-800 border-sky-400 dark:bg-sky-950 dark:text-sky-300 font-semibold'
-                : 'border-surface-200 dark:border-surface-700 hover:bg-surface-100 dark:hover:bg-surface-800'
+                : 'border-surface-200 dark:border-surface-700 hover:bg-surface-100 dark:hover:bg-surface-800 disabled:opacity-50'
             }`}
           >
             Landscape
@@ -94,11 +130,12 @@ export const LayoutTab: React.FC<LayoutTabProps> = ({
         <span className="text-[10px] font-semibold text-surface-500 uppercase tracking-wider px-1">Paper Size</span>
         <select
           value={settings.format}
+          disabled={settings.pageless}
           onChange={(e) => {
             const format = e.target.value as PaperFormat;
             onUpdateSettings((prev) => ({ ...prev, format }));
           }}
-          className="h-6 px-1.5 text-xs bg-surface-50 dark:bg-surface-800 border border-surface-300 dark:border-surface-700 rounded text-surface-900 dark:text-surface-100 outline-none w-28"
+          className="h-6 px-1.5 text-xs bg-surface-50 dark:bg-surface-800 border border-surface-300 dark:border-surface-700 rounded text-surface-900 dark:text-surface-100 outline-none w-28 disabled:opacity-50"
         >
           <option value="Letter">Letter (8.5 × 11")</option>
           <option value="A4">A4 (210 × 297 mm)</option>
@@ -121,7 +158,7 @@ export const LayoutTab: React.FC<LayoutTabProps> = ({
                 : 'border-surface-200 dark:border-surface-700 hover:bg-surface-100 dark:hover:bg-surface-800'
             }`}
           >
-            1 Column
+            1 Col
           </button>
           <button
             onClick={() => onUpdateSettings((prev) => ({ ...prev, columns: 2 }))}
@@ -131,7 +168,17 @@ export const LayoutTab: React.FC<LayoutTabProps> = ({
                 : 'border-surface-200 dark:border-surface-700 hover:bg-surface-100 dark:hover:bg-surface-800'
             }`}
           >
-            2 Columns
+            2 Cols
+          </button>
+          <button
+            onClick={() => onUpdateSettings((prev) => ({ ...prev, columns: 3 }))}
+            className={`px-2 py-0.5 text-xs rounded border transition-colors ${
+              settings.columns === 3
+                ? 'bg-sky-100 text-sky-800 border-sky-400 dark:bg-sky-950 dark:text-sky-300 font-semibold'
+                : 'border-surface-200 dark:border-surface-700 hover:bg-surface-100 dark:hover:bg-surface-800'
+            }`}
+          >
+            3 Cols
           </button>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { PageDimensions, PageMargins, PaperFormat, Orientation, MarginPreset } from '../../types/layout';
+import { PageDimensions, PageMargins, PaperFormat, Orientation, MarginPreset, PageSettings } from '../../types/layout';
 
 // 96 CSS pixels per inch, 25.4 millimeters per inch
 export const MM_TO_PX = 96 / 25.4; // approx 3.779527559
@@ -110,13 +110,14 @@ export function getPageDimensions(
   };
 }
 
-export function getDefaultPageSettings() {
+export function getDefaultPageSettings(): PageSettings {
   const margins = createPageMargins(25.4, 25.4, 25.4, 25.4);
   return {
     format: 'Letter' as PaperFormat,
     orientation: 'portrait' as Orientation,
     margins,
     marginPreset: 'normal' as const,
+    pageless: false,
     differentFirstPage: false,
     differentOddEven: false,
     headerDistanceMm: 12.7,

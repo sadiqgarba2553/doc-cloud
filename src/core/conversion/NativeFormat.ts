@@ -5,13 +5,24 @@ import { DocumentComment, DocumentSuggestion, DocumentRevision } from '../../typ
 import { getDefaultPageSettings } from '../layout/PageGeometry';
 
 function validateSettings(settings: PageSettings) {
-  const number = (value: unknown, min: number, max: number) => typeof value === 'number' && Number.isFinite(value) && value >= min && value <= max;
-  if (!['A4', 'Letter', 'Legal', 'A3', 'A5', 'Executive', 'Custom'].includes(settings.format) || !['portrait', 'landscape'].includes(settings.orientation)) throw new Error('Invalid page format');
-  if (settings.format === 'Custom' && (!number(settings.customWidthMm, 50, 1000) || !number(settings.customHeightMm, 50, 1000))) throw new Error('Invalid custom page dimensions');
+  const number = (value: unknown, min: number, max: number) =>
+    typeof value === 'number' && Number.isFinite(value) && value >= min && value <= max;
+  if (!['A4', 'Letter', 'Legal', 'A3', 'A5', 'Executive', 'Custom'].includes(settings.format) || !['portrait', 'landscape'].includes(settings.orientation))
+    throw new Error('Invalid page format');
+  if (settings.format === 'Custom' && (!number(settings.customWidthMm, 50, 1000) || !number(settings.customHeightMm, 50, 1000)))
+    throw new Error('Invalid custom page dimensions');
   for (const field of ['topMm', 'bottomMm', 'leftMm', 'rightMm', 'topPx', 'bottomPx', 'leftPx', 'rightPx'] as const) {
     if (!number(settings.margins[field], 0, field.endsWith('Px') ? 2000 : 500)) throw new Error('Invalid page margins');
   }
-  if (settings.watermark && (typeof settings.watermark.text !== 'string' || !/^#[0-9a-f]{6}$/i.test(settings.watermark.color) || !number(settings.watermark.angle, -360, 360) || !number(settings.watermark.fontSizePt, 1, 200) || !number(settings.watermark.opacity, 0, 1))) throw new Error('Invalid watermark settings');
+  if (
+    settings.watermark &&
+    (typeof settings.watermark.text !== 'string' ||
+      !/^#[0-9a-f]{6}$/i.test(settings.watermark.color) ||
+      !number(settings.watermark.angle, -360, 360) ||
+      !number(settings.watermark.fontSizePt, 1, 200) ||
+      !number(settings.watermark.opacity, 0, 1))
+  )
+    throw new Error('Invalid watermark settings');
 }
 
 export async function exportToNativeDCloud(pkg: DocCloudFilePackage): Promise<Uint8Array> {
@@ -47,6 +58,21 @@ export async function exportToNativeDCloud(pkg: DocCloudFilePackage): Promise<Ui
 
   // Named Revisions
   zip.file('revisions.json', JSON.stringify(pkg.revisions || [], null, 2));
+
+  // Sections
+  if (pkg.sections) {
+    zip.file('sections.json', JSON.stringify(pkg.sections, null, 2));
+  }
+
+  // Mail Merge configuration
+  if (pkg.mailMerge) {
+    zip.file('mailMerge.json', JSON.stringify(pkg.mailMerge, null, 2));
+  }
+
+  // Table of Contents
+  if (pkg.toc) {
+    zip.file('toc.json', JSON.stringify(pkg.toc, null, 2));
+  }
 
   // Assets folder
   const assetsFolder = zip.folder('assets');
@@ -140,11 +166,33 @@ export async function importFromNativeDCloud(data: Uint8Array | ArrayBuffer): Pr
     revisions = JSON.parse(await revFile.async('text'));
   }
 
+  // Sections
+  let sections: any[] | undefined;
+  const sectionsFile = zip.file('sections.json');
+  if (sectionsFile) {
+    sections = JSON.parse(await sectionsFile.async('text'));
+  }
+
+  // Mail Merge
+  let mailMerge: any | undefined;
+  const mmFile = zip.file('mailMerge.json');
+  if (mmFile) {
+    mailMerge = JSON.parse(await mmFile.async('text'));
+  }
+
+  // Table of Contents
+  let toc: any[] | undefined;
+  const tocFile = zip.file('toc.json');
+  if (tocFile) {
+    toc = JSON.parse(await tocFile.async('text'));
+  }
+
   if (typeof metadata.id !== 'string' || typeof metadata.title !== 'string') throw new Error('Invalid document metadata');
   validateSettings(settings);
   if (!Object.values(headerFooter).every(value => typeof value === 'string')) throw new Error('Invalid header/footer fields');
   if (!Array.isArray(comments) || !comments.every(comment => typeof comment.id === 'string' && typeof comment.content === 'string' && Array.isArray(comment.replies))) throw new Error('Invalid comments');
   if (!Array.isArray(revisions) || !revisions.every(revision => typeof revision.contentJson === 'string')) throw new Error('Invalid versions');
+
   const assets: Record<string, string> = {};
   const assetFiles = Object.values(zip.files).filter(file => file.name.startsWith('assets/') && !file.dir);
   for (const file of assetFiles) assets[file.name.slice('assets/'.length)] = await file.async('base64');
@@ -159,5 +207,8 @@ export async function importFromNativeDCloud(data: Uint8Array | ArrayBuffer): Pr
     suggestions,
     revisions,
     assets,
+    sections,
+    mailMerge,
+    toc,
   };
 }

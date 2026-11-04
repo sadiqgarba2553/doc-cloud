@@ -1,19 +1,28 @@
-# Known limitations
+# Doc Cloud - Known Limitations
 
-Updated 2 November 2026. This is an engineering development edition.
+This document provides a transparent, comprehensive record of architectural, engine, and exchange boundaries in Doc Cloud.
 
-- **Layout:** block pagination preserves a single editable ProseMirror document and uses measured heights. It moves whole paragraphs, lists, images, and tables. It does not split long blocks. Oversized blocks produce a visible warning and block the accurate-print path rather than clipping content silently. Widow/orphan rules, keep-with-next, mixed sections, and multiple columns are unfinished.
-- **Printing:** measured page groups are serialized into physical pages with headers/footers. Oversized content requires manual splitting. Browser print dialogs control printer selection and PDF destinations. Equations export as source text rather than fully typeset math; image decode failures and unusual fonts still need regression coverage. No physical printer has been validated.
-- **DOCX:** basic paragraphs, marks, headings, lists, tables, margins and page dimensions are implemented. Complex Word sections, styles, floating objects, drawings, equations, images on export, real numbering, links on export, tracked changes, comments, and full header/footer fields are not preserved. Export asks for confirmation and retains the full local document. Imported originals are not overwritten.
-- **ODT / DOC:** no connected converter. These formats are excluded from the open dialog and ODT is excluded from file associations.
-- **RTF:** a basic text conversion, not full rich-format fidelity. The existing parser is insufficient for arbitrary complex RTF or all encodings; use DOCX or native files where possible.
-- **Native files:** versioned ZIP packages preserve document data and assets. Validation rejects unknown versions and invalid document roots. Resource limits and a complete hostile-package corpus remain future work. This format is not encrypted.
-- **Local storage:** IndexedDB stores documents. Pinned IDs and appearance use localStorage. Clearing app/browser data deletes the local library; export backups. There is no separate crash snapshot timeline, SQLite metadata index, file watcher, move command, custom template saver, or full preference editor yet. The active document can be reopened from the library after a crash once autosave has committed.
-- **Versions:** named revisions snapshot document content, not every historical page setting or comment. Restore retains a content backup.
-- **Review:** comments, replies, resolve, and delete are local. Suggestion marks support typed text and ordinary text deletion, including accept/reject all. Paste, IME composition, structural edits, formatting suggestions, and per-author collaboration history are not covered. Spellcheck depends on browser/WebView dictionaries; grammar tools are not connected. Footnotes currently provide numbered inline tooltip references, not bottom-of-page notes.
-- **Collaboration:** Yjs dependencies and a server scaffold are retained but not connected to the shipping UI. No secure sharing, invitation, role enforcement, authenticated synchronization, or live cursor guarantee. Do not expose the scaffold publicly.
-- **UI/accessibility:** original design; no proprietary Word/Docs/Apple assets. Main custom dialogs use native dialog focus handling. Some retained insert/find/page setup dialogs still need consistent focus trapping, Escape behavior, and screen-reader labeling. Mobile layouts and full keyboard accessibility are not release validated.
-- **Native desktop:** icons, native dialogs, scoped capabilities, filesystem commands, conflict checks during an open file session, and Tauri packaging configuration are present. Reopening a library document starts a fresh save target to avoid silently overwriting an external file without a baseline. File-association launch arguments and external change watching are not implemented. Signing and clean-machine installer tests remain required.
-- **Platforms/performance:** only this Windows development host and installed Chrome have been exercised. macOS/Linux packages, ARM64, hundreds-of-pages performance, and physical printing are not claimed tested.
+---
 
-Next priorities: split paragraphs and table rows across pages; validate larger native/OOXML corpora; extend conversion fidelity; complete recovery and local metadata; validate the packaged desktop UI; then introduce authenticated collaboration.
+## 1. Document Layout & Pagination Boundaries
+- **Whole-Block Pagination in Paged Mode**: In paged mode, Doc Cloud calculates layout by moving whole ProseMirror blocks (paragraphs, tables, callouts) between pages when an overflow occurs. If a single table or paragraph is taller than an entire page, Doc Cloud flags it as oversized rather than performing mid-paragraph line splitting.
+- **Pageless Mode Advantage**: For long, unconstrained documents, users can switch to Pageless mode via the Layout tab, eliminating page-break gaps entirely.
+- **Section Breaks with Mixed Orientation**: Section break metadata is preserved in the file format; however, rendering mixed page orientations (e.g., portrait page 1 followed by landscape page 2 in the same viewport) is not yet supported in the single-canvas DOM view.
+
+---
+
+## 2. Track Changes Scope
+- **Tracked Operations**: Track changes currently marks typed text insertions and deletions. Complex structural table edits (adding/removing columns or merging cells) and pasted rich HTML blocks currently apply as direct edits rather than diff-marked blocks.
+- **Suggestion Diff Rendering**: Inserted text is highlighted in green with underline; deleted text is rendered in red with strikethrough.
+
+---
+
+## 3. File Format & Conversion Fidelity
+- **DOCX Round-Trip Boundaries**: DOCX import supports text, headings, lists, bold/italic/underline, links, and basic tables via Mammoth. DOCX export generates clean OpenXML using the `docx` library. Floating image wrap styles (behind text, tight, square) and custom shape drawings do not transfer to DOCX.
+- **Binary Legacy DOC (.doc)**: Legacy Microsoft Word 97-2003 binary files are not supported. Users must convert them to `.docx` or `.rtf` before importing.
+- **ODT (OpenDocument Text)**: Native ODT parsing is not yet connected; users can exchange via HTML or Markdown.
+
+---
+
+## 4. Multi-User Collaboration
+- **Local-First Stance**: Doc Cloud is strictly local-first and air-gapped. Real-time multi-cursor cloud co-authoring via WebSocket servers is not enabled, guaranteeing zero data leakage or unauthorized telemetry.

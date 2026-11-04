@@ -1,4 +1,4 @@
-import { PageSettings, HeaderFooterContent } from './layout';
+import { PageSettings, HeaderFooterContent, DocumentSection } from './layout';
 import { DocumentComment, DocumentSuggestion, DocumentRevision } from './review';
 
 export interface DocumentMetadata {
@@ -14,6 +14,19 @@ export interface DocumentMetadata {
   readingTimeMinutes: number;
 }
 
+export interface MailMergeConfig {
+  recipients: Record<string, string>[];
+  fields: string[];
+  currentRecordIndex: number;
+}
+
+export interface TableOfContentsItem {
+  id: string;
+  level: number;
+  text: string;
+  pageNumber?: number;
+}
+
 export interface DocCloudFilePackage {
   formatVersion: '1.0.0';
   metadata: DocumentMetadata;
@@ -24,6 +37,9 @@ export interface DocCloudFilePackage {
   suggestions: DocumentSuggestion[];
   revisions: DocumentRevision[];
   assets: Record<string, string>; // assetId -> base64 or relative path
+  sections?: DocumentSection[];
+  mailMerge?: MailMergeConfig;
+  toc?: TableOfContentsItem[];
 }
 
 export interface RecentDocumentItem {

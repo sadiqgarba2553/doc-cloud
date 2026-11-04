@@ -22,6 +22,8 @@ export const PageCanvas: React.FC<PageCanvasProps> = ({
   children,
   onEditHeaderFooter,
 }) => {
+  const isPageless = !!settings.pageless;
+
   const dims = getPageDimensions(
     settings.format,
     settings.orientation,
@@ -33,6 +35,29 @@ export const PageCanvas: React.FC<PageCanvasProps> = ({
   const bottomPx = settings.margins.bottomPx;
   const leftPx = settings.margins.leftPx;
   const rightPx = settings.margins.rightPx;
+
+  if (isPageless) {
+    return (
+      <div
+        style={{
+          width: '100%',
+          maxWidth: '920px',
+        }}
+        className="relative transition-all duration-150 mx-auto"
+      >
+        <div
+          style={{
+            padding: '40px 48px 100px 48px',
+            columnCount: settings.columns,
+            columnGap: `${settings.columnGapMm}mm`,
+          }}
+          className="relative bg-white dark:bg-surface-900 rounded-lg shadow-sm border border-surface-200/80 dark:border-surface-800 text-surface-900 dark:text-surface-100 min-h-[85vh]"
+        >
+          {children}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
